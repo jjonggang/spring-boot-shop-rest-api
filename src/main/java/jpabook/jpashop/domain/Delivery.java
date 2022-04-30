@@ -14,7 +14,7 @@ public class Delivery {
     @Column(name="delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery") // OneToOne인 경우에는 access가 많은 곳에 foreign key를 놓는다.
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY) // OneToOne인 경우에는 access가 많은 곳에 foreign key를 놓는다.
     private Order order;
 
     @Embedded
