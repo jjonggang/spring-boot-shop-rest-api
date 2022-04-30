@@ -20,7 +20,7 @@ public class Order {
     private Long id;
 
     // order와 member는 다대일 관계
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     // mapping을 뭘로 할지를 명시해준다.
     // 양방향 참조가 일어났다. foreign key는 단 하나이므로, 연관관계의 주인을 정해줘야 한다.
     @JoinColumn(name = "member_id")

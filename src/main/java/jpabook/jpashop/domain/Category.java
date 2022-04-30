@@ -30,7 +30,7 @@ public class Category {
 
     // 하나의 카테고리는 어떤 카테고리를 부모로 가질 수 있고.
     // 부모 카테고리는 자식 카테고리를 여러 개 가질 수 있다.
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
