@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+@Transactional // 테스트에 붙으면 롤백해버린다.
 public class MemberServiceTest {
 
     @Autowired
@@ -37,13 +37,27 @@ public class MemberServiceTest {
 
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class) // 해당 exception이 발생해야한다.
     public void 중복_회원_예외() throws Exception{
         // given
+        Member member1 = new Member();
+        member1.setName("kim");
+
+        Member member2 = new Member();
+        member2.setName("kim");
 
         // when
+        memberService.join(member1);
+        memberService.join(member2);
+//        try{
+//            memberService.join(member2); // 예외가 발생해야 한다.
+//
+//        }catch (IllegalStateException e){
+//            return;
+//        }
 
         // then
+        Assert.fail("예외가 발생해야 한다."); // 여기까지 왔으면, 테스트에 실패했다는 의미
 
     }
 }
