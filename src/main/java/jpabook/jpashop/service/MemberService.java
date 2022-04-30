@@ -2,6 +2,8 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,13 +12,15 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true) // springframework에서 제공되는 걸로 사용한다. 데이터 변경이 없는, 읽기 전용 메서드에는 readonly를 적용해준다. 영속성 컨텍스트를 플러쉬하지 않으므로, 약간의 성능 향상.
+@RequiredArgsConstructor
+// cmd + shift + T로 테스트를 생성
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository){
-        this.memberRepository = memberRepository;
-    }
+//    public MemberService(MemberRepository memberRepository){
+//        this.memberRepository = memberRepository;
+//    }
 
     // 회원가입
     @Transactional // 여기서는 write 권한도 필요하므로, 따로 또 설정해준다. 여기서 설정된 사항이 클래스 단위로 적용된 Transactional보다 우선적으로 적용된다.

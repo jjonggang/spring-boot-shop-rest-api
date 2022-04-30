@@ -1,6 +1,7 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,10 +9,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository // @Component가 포함돼있어서, 컴포넌트 스캔의 대상이 돼서, 스프링 빈으로 자동 등록 된다.
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+//    @PersistenceContext
+//    private EntityManager em;
+
+    private final EntityManager em;
 
     public void save(Member member){
         em.persist(member); // persist를 하면, 영속성 컨텍스트에 멤버 객체를 넣는다. 트랜잭션이 커밋되는 시점에 DB에 반영된다.
