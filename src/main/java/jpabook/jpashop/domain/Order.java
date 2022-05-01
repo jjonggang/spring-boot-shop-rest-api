@@ -27,12 +27,12 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // Order가 persist될 때 orderItem도 같이 persist된다.
     private List<OrderItem> orderItems = new ArrayList<>();
     // orderItems에다 아이템을 저장하고, Order를 저장하면, orderItems도 같이 저장이 된다.
     // CascadeType.All을 하면, 자연스럽게 persist를 전파한다.
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Order가 persist될 때 delivery도 persist 된다.
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
